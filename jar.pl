@@ -8,3 +8,12 @@ prox((X, Y), (A, B)):- Y < 3
 prox((X, Y), (A, B)):- X < 4
 	, A is min(4, X + Y)
 	, B is Y - min(4 - X, Y).
+	
+fim((0, 2)).
+fim((2, 0)).
+
+cam((X, Y), (X1, Y1), [V | Vis]):- fim(V), reverse([V| Vis], R), write(R),!.
+cam((X, Y), (X1, Y1), Vis):- prox((X, Y), (X1, Y1)), \+ member((X1, X1), Vis).
+cam((X, Y), (X2, Y2), Vis):- prox((X, Y), (X1, Y1)), \+ member((X1, X1), Vis)
+	, Vis1 = [(X1, Y1)| Vis]
+	, cam((X1, Y1), (X2, Y2), Vis1).
