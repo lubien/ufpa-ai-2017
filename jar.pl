@@ -45,7 +45,7 @@ busca((X,Y),Vis,Res1):-prox((X,Y),(X1,Y1)),
 %% OBS: PROLOG reserva => <= para implementar regras lógica 
 %%  
 
-all_solutions(S):- busca((0, 0), [(0, 0)], R), findall(R, busca((0, 0), [(0, 0)], R), S).
+all_solutions(S):- findall(R, busca((0, 0), [(0, 0)], R), S).
 smallest_solution(S):- all_solutions(R),
                        map_list_to_pairs(length, R, Pairs),
                        keysort(Pairs, Sorted),
