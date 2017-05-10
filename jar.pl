@@ -17,7 +17,7 @@ prox((X,Y),(X1,Y1)):- Y < 3, X1 is (X - min(X, 3-Y)), Y1 is min(3, X+Y). % troca
 prox((X,Y),(X1,Y1)):- X < 4, X1 is min(4, X+Y), Y1 is (Y - min(4-X, Y)).
 
 %% estado inicial e final 
-%fim((0,2)).
+fim((0,2)).
 fim((2,0)).
 %%
 %% ?- busca(+Inicial,+Vis).
@@ -45,7 +45,7 @@ busca((X,Y),Vis,Res1):-prox((X,Y),(X1,Y1)),
 %% OBS: PROLOG reserva => <= para implementar regras lógica 
 %%  
 
-all_solutions(S):- busca((0, 0), [(0, 0)], R), findall(R, member((2, 0), R), S).
+all_solutions(S):- busca((0, 0), [(0, 0)], R), findall(R, busca((0, 0), [(0, 0)], R), S).
 smallest_solution(S):- all_solutions(R),
                        map_list_to_pairs(length, R, Pairs),
                        keysort(Pairs, Sorted),
